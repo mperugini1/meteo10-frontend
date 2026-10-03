@@ -1,26 +1,134 @@
 @import "tailwindcss";
 
+/* Tokens de cor: claro por padrão, escuro conforme o sistema. Status sempre acompanhado de ícone + texto. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  color-scheme: light;
+  --bg: #f4f5f1;
+  --surface: #ffffff;
+  --surface-2: #eef0ea;
+  --border: #d9dbd3;
+  --ink: #161714;
+  --ink-2: #474842;
+  --ink-3: #62635c;
+  --brand: #16613f;
+  --brand-ink: #ffffff;
+  --brand-soft: #e3f1e8;
+  --focus: #2a78d6;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --ok: #17703a;
+  --ok-bg: #e4f3e8;
+  --warn: #7a4f00;
+  --warn-bg: #fff3d1;
+  --warn-border: #e2ad19;
+  --crit: #a8201a;
+  --crit-bg: #fde7e5;
+  --crit-border: #e0534a;
+  --offline: #55564f;
+  --offline-bg: #e9eae5;
+
+  --series-1: #2a78d6;
+  --series-band: rgba(42, 120, 214, 0.16);
+  --grid: #e6e7e1;
+  --axis: #62635c;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    color-scheme: dark;
+    --bg: #111210;
+    --surface: #1a1b19;
+    --surface-2: #242522;
+    --border: #383935;
+    --ink: #f3f4f0;
+    --ink-2: #c6c7bd;
+    --ink-3: #a3a49b;
+    --brand: #5cc78f;
+    --brand-ink: #0b1f14;
+    --brand-soft: #173325;
+    --focus: #6da7ec;
+
+    --ok: #6fd28d;
+    --ok-bg: #15301f;
+    --warn: #f3c552;
+    --warn-bg: #362a0a;
+    --warn-border: #a97c0b;
+    --crit: #ff8f86;
+    --crit-bg: #3b1513;
+    --crit-border: #c2453c;
+    --offline: #b0b1a8;
+    --offline-bg: #2a2b28;
+
+    --series-1: #3987e5;
+    --series-band: rgba(57, 135, 229, 0.22);
+    --grid: #2c2d2a;
+    --axis: #a3a49b;
   }
 }
 
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--border);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-brand: var(--brand);
+  --color-brand-ink: var(--brand-ink);
+  --color-brand-soft: var(--brand-soft);
+  --color-ok: var(--ok);
+  --color-ok-bg: var(--ok-bg);
+  --color-warn: var(--warn);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-border: var(--warn-border);
+  --color-crit: var(--crit);
+  --color-crit-bg: var(--crit-bg);
+  --color-crit-border: var(--crit-border);
+  --color-offline: var(--offline);
+  --color-offline-bg: var(--offline-bg);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-feature-settings: "tnum" 1;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Skeleton de carregamento */
+.skeleton {
+  background: linear-gradient(90deg, var(--surface-2) 0%, var(--border) 50%, var(--surface-2) 100%);
+  background-size: 200% 100%;
+  animation: skeleton 1.4s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton { animation: none; }
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* Recharts: textos dos eixos e tooltip seguem os tokens */
+.recharts-cartesian-axis-tick-value {
+  fill: var(--axis);
+  font-size: 12px;
 }

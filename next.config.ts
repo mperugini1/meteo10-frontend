@@ -1,7 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  // Evita que o Next procure lockfiles fora do repositório
+  turbopack: { root: process.cwd() },
+  poweredByHeader: false,
 };
 
 export default nextConfig;
